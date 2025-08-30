@@ -11,23 +11,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout code
+      # Checkout code
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # 2️⃣ Build Docker image
+      # Build Docker image
       - name: Build Docker image
         run: docker build -t hello-java-app .
 
-      # 3️⃣ Run Docker container (test run)
+      # Run Docker container (test run)
       - name: Run Docker container
         run: docker run --rm hello-java-app
 
-      # 4️⃣ Login to DockerHub
+      # Login to DockerHub
       - name: Login to DockerHub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-      # 5️⃣ Tag & Push Docker image to DockerHub
+      # Tag & Push Docker image to DockerHub
       - name: Push Docker image
         run: |
           docker tag hello-java-app ${{ secrets.DOCKER_USERNAME }}/hello-java-app:latest
